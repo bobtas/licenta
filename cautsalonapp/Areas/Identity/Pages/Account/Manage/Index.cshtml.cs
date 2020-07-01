@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using cautsalonapp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace cautsalonapp.Areas.Identity.Pages.Account.Manage
 {
@@ -13,13 +15,16 @@ namespace cautsalonapp.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ApplicationDbContext _ctx;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            ApplicationDbContext ctx)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _ctx = ctx;
         }
 
         public string Username { get; set; }
@@ -33,8 +38,25 @@ namespace cautsalonapp.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Telefon")]
             public string PhoneNumber { get; set; }
+            [Display(Name = "Nume")]
+            public string Nume { get; set; }
+            
+            [Display(Name = "Prenume")]
+            public string Prenume { get; set; }
+            
+            [Display(Name = "Sex")]
+            public int Sex { get; set; }
+            
+            [Display(Name = "Telefon")]
+            public string Telefon { get; set; }
+            
+            [Display(Name = "Judet")]
+            public string Judet { get; set; }
+            
+            [Display(Name = "Adresa")]
+            public string Adresa { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -42,11 +64,20 @@ namespace cautsalonapp.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            var client = await (from c in _ctx.Clienti
+                         where c.Webuser.Id == user.Id
+                         select c).FirstOrDefaultAsync();
+
             Username = userName;
 
             Input = new InputModel
-            {
-                PhoneNumber = phoneNumber
+            {                
+                Adresa = client.Adresa,
+                Judet = client.Judet,
+                Nume = client.Nume,
+                Prenume = client.Prenume,
+                Sex = client.Sex,
+                Telefon = client.Telefon
             };
         }
 

@@ -25,17 +25,20 @@ namespace cautsalonapp.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _ctx;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext ctx)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _ctx = ctx;
         }
 
         [BindProperty]
@@ -112,11 +115,11 @@ namespace cautsalonapp.Areas.Identity.Pages.Account
                         Telefon = Input.Telefon,
                         Webuser = user
                     };
-                    using (var ctx = new ApplicationDbContext())
-                    {
-                        ctx.Clienti.Add(client);
-                        await ctx.SaveChangesAsync();
-                    }
+                    
+                   
+                        _ctx.Clienti.Add(client);
+                        await _ctx.SaveChangesAsync();
+                    
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
