@@ -6,27 +6,112 @@
 
 <div class="row">
     <div class="col-md-6 offset-3">
-        <h1>@ViewData["Title"]</h1>
-        <section>
-            <form id="account" method="post">
-                <div style="font-size:large"><b>Foloseste contul tau pentru a te autentifica.</b></div>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                 
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <section style="background:#e2f6ff !important; border-radius:7px;">
+                <div style="margin:10px;">
+                    <div>
+                        <p style="font-size:30px;color:green;"><strong>Date autentificare</strong></p>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Email" class="control-label"></label>
+                        <input asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password" class="control-label"></label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.ConfirmPassword" class="control-label"></label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <br />
                 </div>
-                <div class="form-group">
-                   
+            </section>
+            <section style="background:#e2f6ff !important; border-radius:7px;">
+                <div style="margin:10px;">
+                    <div>
+                        <p style="font-size:30px;color:green;"><strong>Detalii firma</strong></p>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.DenumireFirma" class="control-label"></label>
+                        <input asp-for="Input.DenumireFirma" class="form-control" />
+                        <span asp-validation-for="Input.DenumireFirma" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Cui" class="control-label"></label>
+                        <input asp-for="Input.Cui" class="form-control" />
+                        <span asp-validation-for="Input.Cui" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.RegistruComert" class="control-label"></label>
+                        <input asp-for="Input.RegistruComert" class="form-control" />
+                        <span asp-validation-for="Input.RegistruComert" class="text-danger"></span>
+                    </div>
+                    <br />
                 </div>
-                <div class="form-group">
-                    
+            </section>
+            <section style="background:#e2f6ff !important; border-radius:7px;">
+                <div style="margin:10px;">
+                    <div>
+                        <p style="font-size:30px;color:green;"><strong>Detalii salon</strong></p>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.NumeSalon" class="control-label"></label>
+                        <input asp-for="Input.NumeSalon" class="form-control" />
+                        <span asp-validation-for="Input.NumeSalon" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Telefon_salon" class="control-label"></label>
+                        <input asp-for="Input.Telefon_salon" class="form-control" />
+                        <span asp-validation-for="Input.Telefon_salon" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Telefon_sms" class="control-label"></label>
+                        <input asp-for="Input.Telefon_sms" class="form-control" />
+                        <span asp-validation-for="Input.Telefon_sms" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Website" class="control-label"></label>
+                        <input asp-for="Input.Website" class="form-control" />
+                        <span asp-validation-for="Input.Website" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Facebook" class="control-label"></label>
+                        <input asp-for="Input.Facebook" class="form-control" />
+                        <span asp-validation-for="Input.Facebook" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Judet" class="control-label"></label>
+                        <input asp-for="Input.Judet" class="form-control" />
+                        <span asp-validation-for="Input.Judet" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Oras" class="control-label"></label>
+                        <input asp-for="Input.Oras" class="form-control" />
+                        <span asp-validation-for="Input.Oras" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Adresa" class="control-label"></label>
+                        <input asp-for="Input.Adresa" class="form-control" />
+                        <span asp-validation-for="Input.Adresa" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Descriere" class="control-label"></label>
+                        <textarea asp-for="Input.Descriere" class="form-control"></textarea>
+
+                    </div>
+                    <br />
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-               
-            </form>
-        </section>
+            </section>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
+
 

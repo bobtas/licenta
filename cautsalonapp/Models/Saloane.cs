@@ -18,6 +18,7 @@ namespace cautsalon.Models
         public string Adresa { get; set; }
         public string Descriere { get; set; }
         public int Cod_firma { get; set; }
+        public string Oras { get; set; }
         public Firme Firma { get; set; }        
         public Servicii Serviciu { get; set; }
 
