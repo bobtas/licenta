@@ -24,24 +24,41 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
+                            @if (User.IsInRole("salonowner"))
+                            {
+                                
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="servicii" asp-action="Index"><i class="fa fa-fw fa-barcode" style="color:green;"></i>Servicii</a>
+                                <div class="dropdown show">
+                                    <a class="btn btn-secondary dropdown-toggle" style="background-color: green;border-color: #f9f9f9;color: #e2f6ff;"
+                                       href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Management salon
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" asp-area="" asp-controller="Saloanes" asp-action="Index"><i class="fa fa-fw fa-home" style="color:green;"></i>Salonul meu</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="servicii" asp-action="Index"><i class="fa fa-fw fa-barcode" style="color:green;"></i>Servicii</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="programari" asp-action="Index"><i class="fa fa-fw fa-clock" style="color:green;"></i>Programari</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="rapoarte" asp-action="Index"><i class="fa fa-fw fa-file-excel" style="color:green;"></i>Rapoarte</a>
+                                    </div>
+                                </div>                                
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="programari" asp-action="Index"><i class="fa fa-fw fa-clock" style="color:green;"></i>Programari</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="rapoarte" asp-action="Index"><i class="fa fa-fw fa-file-excel" style="color:green;"></i>Rapoarte</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="despre_noi" asp-action="Index"><i class="fa fa-fw fa-address-card" style="color:green;"></i>Despre noi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="faq" asp-action="Index"><i class="fa fa-fw fa-question" style="color:green;"></i>FAQ</a>
-                            </li>
+                                
+                                }
+                                else
+                                {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="programari" asp-action="Index"><i class="fa fa-fw fa-clock" style="color:green;"></i>Programari</a>
+                                </li>
+                                }
 
-                        </ul>
-                        <partial name="_AisalonPartial" />
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="despre_noi" asp-action="Index"><i class="fa fa-fw fa-address-card" style="color:green;"></i>Despre noi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="faq" asp-action="Index"><i class="fa fa-fw fa-question" style="color:green;"></i>FAQ</a>
+                                </li>
+
+</ul>
+                       
                     </div>
                 </div>
             }

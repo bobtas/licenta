@@ -107,6 +107,8 @@ namespace cautsalonapp.Areas.Aisalon.Pages.Create
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "salonowner");
+                    _logger.LogInformation("webuser a fost adaugat cu rol de salonowner");
                     _logger.LogInformation("Webuser a fost creat.");
 
                     _logger.LogInformation("Se creaza firma");

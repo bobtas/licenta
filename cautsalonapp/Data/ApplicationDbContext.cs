@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using cautsalon.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,8 @@ namespace cautsalonapp.Data
 
         }
 
+       
+
         public DbSet<Firme> Firme { get; set; }
         public DbSet<Clienti> Clienti { get; set; }
         public DbSet<Saloane> Saloane { get; set; }
@@ -28,6 +31,12 @@ namespace cautsalonapp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(new IdentityRole { Name = "admin", NormalizedName = "admin".ToUpper() });
+            modelBuilder.Entity<IdentityRole>()
+               .HasData(new IdentityRole { Name = "salonowner", NormalizedName = "salonowner".ToUpper() });
+            modelBuilder.Entity<IdentityRole>()
+               .HasData(new IdentityRole { Name = "client", NormalizedName = "client".ToUpper() });
 
             modelBuilder.Entity<Firme>()
                         .HasKey(k => k.Cod_firma)

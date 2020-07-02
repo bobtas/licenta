@@ -101,8 +101,11 @@ namespace cautsalonapp.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-                    _logger.LogInformation("Creating client");
+                    _logger.LogInformation("webuser a fost creat cu success");
+                    await _userManager.AddToRoleAsync(user, "client");
+                    _logger.LogInformation("webuser a fost adaugat cu rol de client");
+
+                    _logger.LogInformation("am creat clientul");
 
                     var client = new Clienti
                     {

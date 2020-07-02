@@ -216,5 +216,6 @@ namespace cautsalonapp.Data.Migrations
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
         }
+
     }
 }
