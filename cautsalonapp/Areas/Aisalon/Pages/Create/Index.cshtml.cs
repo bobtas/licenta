@@ -3,15 +3,39 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using cautsalon.Models;
+using cautsalonapp.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace cautsalonapp.Areas.Aisalon.Pages.Create
 {
     public class IndexModel : PageModel
     {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ILogger<IndexModel> _logger;        
+        private readonly ApplicationDbContext _ctx;
+
+        
+        public IndexModel(
+           UserManager<IdentityUser> userManager,
+           SignInManager<IdentityUser> signInManager,
+           ILogger<IndexModel> logger,
+           ApplicationDbContext ctx)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _logger = logger;
+            _ctx = ctx;
+        }
+
         [BindProperty]
         public InputModel Input { get; set; }
+
+        public string ReturnUrl { get; set; }
 
         public class InputModel
         {
@@ -39,7 +63,7 @@ namespace cautsalonapp.Areas.Aisalon.Pages.Create
             public string Cui { get; set; }
             [Required(ErrorMessage = "Acest camp este obligatoriu.")]
             [Display(Name = "Registrul Comertului")]
-            public int RegistruComert { get; set; }
+            public string RegistruComert { get; set; }
 
             [Required(ErrorMessage = "Acest camp este obligatoriu.")]
             [Display(Name = "Denumire salon")]
@@ -72,6 +96,60 @@ namespace cautsalonapp.Areas.Aisalon.Pages.Create
         }
         public void OnGet()
         {
+        }
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var result = await _userManager.CreateAsync(user, Input.Password);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("Webuser a fost creat.");
+
+                    _logger.LogInformation("Se creaza firma");
+
+                    var firma = new Firme
+                    {
+                        Cui = Input.Cui,
+                        Denumire = Input.DenumireFirma,
+                        Registrul_comertului = Input.RegistruComert
+                    };
+
+                    _logger.LogInformation("Se creaza salonul");
+                    var salon = new Saloane
+                    {
+                        Adresa = Input.Adresa,
+                        Firma = firma,
+                        Descriere = Input.Descriere,
+                        Facebook = Input.Facebook,
+                        Judet = Input.Judet,
+                        Oras = Input.Oras,
+                        Nume = Input.NumeSalon,
+                        Telefon_salon = Input.Telefon_salon,
+                        Telefon_sms = Input.Telefon_sms,
+                        Website = Input.Website
+                    };
+
+
+                    _ctx.Saloane.Add(salon);
+                    _ctx.Firme.Add(firma);
+                    await _ctx.SaveChangesAsync();
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
+                   
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return Page();
         }
     }
 }

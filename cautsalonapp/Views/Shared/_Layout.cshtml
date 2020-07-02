@@ -25,30 +25,23 @@
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="firme" asp-action="Index">Firme</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="servicii" asp-action="Index"><i class="fa fa-fw fa-barcode" style="color:green;"></i>Servicii</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="servicii" asp-action="Index">Servicii</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="programari" asp-action="Index"><i class="fa fa-fw fa-clock" style="color:green;"></i>Programari</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="programari" asp-action="Index">Programari</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="rapoarte" asp-action="Index"><i class="fa fa-fw fa-file-excel" style="color:green;"></i>Rapoarte</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Saloanes" asp-action="Index">Saloane</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="despre_noi" asp-action="Index"><i class="fa fa-fw fa-address-card" style="color:green;"></i>Despre noi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="rapoarte" asp-action="Index">Rapoarte</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="faq" asp-action="Index"><i class="fa fa-fw fa-question" style="color:green;"></i>FAQ</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="despre_noi" asp-action="Index">Despre noi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="faq" asp-action="Index">FAQ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="aisalon" asp-action="Index">Ai un salon?</a>
-                            </li>
+
                         </ul>
+                        <partial name="_AisalonPartial" />
                     </div>
                 </div>
             }
@@ -63,10 +56,10 @@
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="despre_noi" asp-action="Index">Despre noi</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="despre_noi" asp-action="Index"><i class="fa fa-fw fa-address-card" style="color:green;"></i>Despre noi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="faq" asp-action="Index">FAQ</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="faq" asp-action="Index"><i class="fa fa-fw fa-question" style="color:green;"></i>FAQ</a>
                             </li>
                         </ul>
                         <partial name="_AisalonPartial" />
