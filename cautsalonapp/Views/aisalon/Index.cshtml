@@ -1,9 +1,66 @@
-﻿
+﻿@page
+@model cautsalonapp.Areas.Identity.Pages.Account.AiSalonModel
 @{
-    ViewData["Title"] = "Ai un salon?";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Inregistreaza-te";
 }
 
-<h1>Ai salon? GIEF COCO</h1>
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <h1>@ViewData["Title"]</h1>
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div style="font-size:large"><b>Creeza-ti un cont.</b></div>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Nume"></label>
+                <input asp-for="Input.Nume" class="form-control" />
+                <span asp-validation-for="Input.Nume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Prenume"></label>
+                <input asp-for="Input.Prenume" class="form-control" />
+                <span asp-validation-for="Input.Prenume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Sex"></label>
+                <input asp-for="Input.Sex" class="form-control" />
+                <span asp-validation-for="Input.Sex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Telefon"></label>
+                <input asp-for="Input.Telefon" class="form-control" />
+                <span asp-validation-for="Input.Telefon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Judet"></label>
+                <input asp-for="Input.Judet" class="form-control" />
+                <span asp-validation-for="Input.Judet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Adresa"></label>
+                <input asp-for="Input.Adresa" class="form-control" />
+                <span asp-validation-for="Input.Adresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Inregistreaza-te!</button>
+        </form>
+    </div>    
+</div>
 
-**INSERT TEXT HERE**
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
