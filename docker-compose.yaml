@@ -7,6 +7,8 @@ services:
       - 8000:80
       - 443:443
     restart: always
+    depends_on:
+      - database
   
   database:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
