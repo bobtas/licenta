@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using cautsalon.Models;
+using cautsalonapp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,7 @@ namespace cautsalonapp.Data
         public DbSet<Saloane> Saloane { get; set; }
         public DbSet<Servicii> Servicii { get; set; }
         public DbSet<Programari> Programari { get; set; }
-
+        public DbSet<SaloaneServicii> SaloaneServicii { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -38,6 +39,7 @@ namespace cautsalonapp.Data
             modelBuilder.Entity<IdentityRole>()
                .HasData(new IdentityRole { Name = "client", NormalizedName = "client".ToUpper() });
 
+            
             modelBuilder.Entity<Firme>()
                         .HasKey(k => k.Cod_firma)
                         .HasName("cod_firma");
@@ -53,6 +55,9 @@ namespace cautsalonapp.Data
             modelBuilder.Entity<Programari>()
                         .HasKey(k => k.Cod_programare)
                         .HasName("cod_programare");
+            modelBuilder.Entity<SaloaneServicii>()
+                        .HasKey(k => k.Id)
+                        .HasName("id");
         }
     }
 }

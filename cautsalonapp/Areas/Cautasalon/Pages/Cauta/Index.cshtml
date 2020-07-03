@@ -1,0 +1,54 @@
+﻿@page
+@model cautsalonapp.Areas.Cautasalon.Pages.Cauta.IndexModel
+@{
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <section style="background:#e2f6ff !important; border-radius:7px;">
+                <div style="margin:10px;">
+                    <div>
+                        <p style="font-size:30px;color:green;"><strong>Programeaza-te la un salon</strong></p>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Oras" class="control-label"></label>
+                        <select asp-for="Input.Oras" class="form-control">
+                            <option value="Bucuresti">Bucuresti</option>
+                        </select>
+                        <span asp-validation-for="Input.Oras" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.NumeSalon" class="control-label"></label>
+                        <select asp-for="Input.NumeSalon" class="form-control">
+                            <option value="BeautyMania">Beauty Mania</option>
+                            <option value="Magic saloon">Magic Saloon</option>
+                        </select>
+                        <span asp-validation-for="Input.NumeSalon" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Serviciu" class="control-label"></label>
+                        <select asp-for="Input.Serviciu" class="form-control">
+                            <option value="Tuns barbat">Tuns barbat</option>
+                            <option value="Barbierit">Barbierit</option>
+                            <option value="Tuns femeie">Tuns femeie</option>
+                            <option value="Suvite">Suvite</option>
+                            <option value="Vopsit">Vopsit</option>
+                        </select>
+                        <span asp-validation-for="Input.Serviciu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Data" class="control-label"></label>
+                        <input asp-for="Input.Data" class="form-control" />
+                        <span asp-validation-for="Input.Data" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Fa programare" class="btn btn-primary" />
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
