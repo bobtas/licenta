@@ -31,7 +31,7 @@ namespace cautsalonapp
         {
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                      options.UseSqlServer("Server=localhost;Database=cautsalonapp;User ID=sa;Password=Passw0rd1;"));
+                      options.UseSqlServer("Server=database;Database=cautsalonapp;User ID=sa;Password=Passw0rd1;"));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
