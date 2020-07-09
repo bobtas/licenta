@@ -7,14 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using cautsalon.Models;
 using cautsalonapp.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace cautsalonapp.Controllers
 {
-    public class SaloanesController : Controller
+    
+    public class saloaneController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SaloanesController(ApplicationDbContext context)
+        public saloaneController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,25 +24,24 @@ namespace cautsalonapp.Controllers
         // GET: Saloanes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Saloane.ToListAsync());
+            return View();
         }
 
         // GET: Saloanes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> salonul_meu()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var salon = await _context.Saloane.Where(x => x.Firma.Webuser.UserName == User.Identity.Name).FirstOrDefaultAsync();
 
-            var saloane = await _context.Saloane
-                .FirstOrDefaultAsync(m => m.Cod_salon == id);
-            if (saloane == null)
-            {
-                return NotFound();
-            }
+            var salonVm = new saloaneViewModel { };
 
-            return View(saloane);
+            salonVm.Salon = salon;
+            var servicii = new List<Servicii>();
+            servicii.Add(new Servicii { Denumire = "Tuns barbat", Pret = 25 });
+            servicii.Add(new Servicii { Denumire = "Tuns femei", Pret = 50 });
+            salonVm.Servicii = servicii;
+
+
+            return View(salonVm);
         }
 
         // GET: Saloanes/Create

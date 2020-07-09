@@ -37,9 +37,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descriere)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cod_firma)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -69,10 +67,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Descriere)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cod_firma)
-            </td>
+            </td>            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Cod_salon">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Cod_salon">Details</a> |

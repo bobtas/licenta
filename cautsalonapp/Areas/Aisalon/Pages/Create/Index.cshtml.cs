@@ -107,20 +107,22 @@ namespace cautsalonapp.Areas.Aisalon.Pages.Create
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "salonowner");
-                    _logger.LogInformation("webuser a fost adaugat cu rol de salonowner");
                     _logger.LogInformation("Webuser a fost creat.");
 
-                    _logger.LogInformation("Se creaza firma");
+                    await _userManager.AddToRoleAsync(user, "salonowner");
+                    _logger.LogInformation("webuser a fost adaugat cu rol de salonowner");                    
+
+                    _logger.LogInformation("se creaza firma");
 
                     var firma = new Firme
                     {
                         Cui = Input.Cui,
                         Denumire = Input.DenumireFirma,
-                        Registrul_comertului = Input.RegistruComert
+                        Registrul_comertului = Input.RegistruComert,
+                        Webuser = user                        
                     };
 
-                    _logger.LogInformation("Se creaza salonul");
+                    _logger.LogInformation("se creaza salonul");
                     var salon = new Saloane
                     {
                         Adresa = Input.Adresa,

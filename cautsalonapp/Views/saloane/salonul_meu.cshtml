@@ -1,0 +1,87 @@
+﻿@model cautsalon.Models.saloaneViewModel
+
+@{
+    ViewData["Title"] = "Salonul meu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Salonul meu</h1>
+
+<div>
+    <h4>Detalii</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Nume)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Salon.Nume)
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Telefon_salon)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Salon.Telefon_salon)
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Telefon_sms)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Salon.Telefon_sms)
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Website)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Salon.Website)
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Facebook)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Salon.Facebook)
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Judet)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Salon.Judet)
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Adresa)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Salon.Adresa)
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Descriere)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Salon.Descriere)
+        </dd>
+    </dl>
+    <hr />
+    <h4>Servicii</h4>
+    @foreach (var item in Model.Servicii)
+    {
+        <dl class="row">
+            <dt class="col-sm-4" style="color:green;">
+                @Html.DisplayNameFor(modelItem => item.Denumire)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(modelItem => item.Denumire)
+            </dd>
+            <dt class="col-sm-4" style="color:green;">
+                @Html.DisplayNameFor(modelItem => item.Pret)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(modelItem => item.Pret) RON
+            </dd>
+        </dl>
+    }
+        <hr />
+    </div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Salon.Cod_salon" class="btn btn-success">Modifica informatii salon</a>
+    <a asp-action="Edit" asp-route-id="@Model.Salon.Cod_salon" class="btn btn-success">Adauga servicii</a>
+</div>

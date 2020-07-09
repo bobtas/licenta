@@ -16,11 +16,6 @@ namespace cautsalonapp.Data
         {
             Database.EnsureCreated();
         }
-        public ApplicationDbContext()
-        {
-
-        }
-
        
 
         public DbSet<Firme> Firme { get; set; }
