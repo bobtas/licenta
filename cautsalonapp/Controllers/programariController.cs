@@ -22,7 +22,27 @@ namespace cautsalonapp.Controllers
         // GET: programari
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Programari.ToListAsync());
+            var query = from p in _context.Programari
+                       join s in _context.Saloane
+                       on p.Salon.Cod_salon equals s.Cod_salon
+                       join se in _context.Servicii
+                       on p.Serviciu.Cod_serviciu equals se.Cod_serviciu
+                       where p.Client.Webuser.UserName == User.Identity.Name
+                       select new { p.Data, p.Observatii, p.Serviciu, p.Salon, p.Cod_programare };
+            List<Programari> programari = new List<Programari>();
+            foreach (var item in query)
+            {
+                var programare = new Programari
+                {
+                    Cod_programare = item.Cod_programare,
+                    Data = item.Data,
+                    Observatii = item.Observatii,
+                    Salon = item.Salon,
+                    Serviciu = item.Serviciu
+                };
+                programari.Add(programare);
+            }
+            return View(programari);
         }
 
         // GET: programari/Details/5
@@ -33,14 +53,28 @@ namespace cautsalonapp.Controllers
                 return NotFound();
             }
 
-            var programari = await _context.Programari
-                .FirstOrDefaultAsync(m => m.Cod_programare == id);
-            if (programari == null)
-            {
-                return NotFound();
-            }
+            var query = (from p in _context.Programari
+                        join s in _context.Saloane
+                        on p.Salon.Cod_salon equals s.Cod_salon
+                        join se in _context.Servicii
+                        on p.Serviciu.Cod_serviciu equals se.Cod_serviciu
+                        where p.Client.Webuser.UserName == User.Identity.Name
+                        where p.Cod_programare == id
+                        select new { p.Data, p.Observatii, p.Serviciu, p.Salon, p.Cod_programare }).FirstOrDefault();
+            
+            
+                var programare = new Programari
+                {
+                    Cod_programare = query.Cod_programare,
+                    Data = query.Data,
+                    Observatii = query.Observatii,
+                    Salon = query.Salon,
+                    Serviciu = query.Serviciu
+                };
+                
+            
 
-            return View(programari);
+            return View(programare);
         }
 
         // GET: programari/Create

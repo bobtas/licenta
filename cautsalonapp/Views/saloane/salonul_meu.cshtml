@@ -60,7 +60,7 @@
             @Html.DisplayFor(model => model.Salon.Descriere)
         </dd>
     </dl>
-    <hr />
+    @*<hr />
     <h4>Servicii</h4>
     @foreach (var item in Model.Servicii)
     {
@@ -79,9 +79,8 @@
             </dd>
         </dl>
     }
-        <hr />
+        <hr />*@
     </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Salon.Cod_salon" class="btn btn-success">Modifica informatii salon</a>
-    <a asp-action="Edit" asp-route-id="@Model.Salon.Cod_salon" class="btn btn-success">Adauga servicii</a>
+    <a asp-action="Edit" asp-route-id="@Model.Salon.Cod_salon" class="btn btn-success">Modifica informatii salon</a>    
 </div>

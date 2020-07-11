@@ -1,22 +1,26 @@
 ﻿@model IEnumerable<cautsalon.Models.Programari>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Programarile mele";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Programarile mele</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table" style="background: #e2f6ff;">
     <thead>
         <tr>
-            <th>
+
+            <th style="color: green;">
+                @Html.DisplayNameFor(model => model.Salon.Nume)
+            </th>
+            <th style="color: green;">
+                @Html.DisplayNameFor(model => model.Serviciu.Denumire)
+            </th>
+            <th style="color: green;">
                 @Html.DisplayNameFor(model => model.Data)
             </th>
-            <th>
+            <th style="color: green;">
                 @Html.DisplayNameFor(model => model.Observatii)
             </th>
             <th></th>
@@ -26,15 +30,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Salon.Nume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serviciu.Denumire)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Data)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Observatii)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Cod_programare">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Cod_programare">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Cod_programare">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Cod_programare" class="btn btn-sm btn-info">Detalii</a>
             </td>
         </tr>
 }

@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<cautsalon.Models.Servicii>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Servicii salon";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Serviciile mele</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Adauga un nou serviciu</a>
 </p>
 <table class="table">
     <thead>
@@ -29,12 +29,11 @@
                 @Html.DisplayFor(modelItem => item.Denumire)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pret)
+                @Html.DisplayFor(modelItem => item.Pret) RON
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Cod_serviciu">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Cod_serviciu">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Cod_serviciu">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Cod_serviciu" class="btn btn-sm btn-info">Editeaza</a> |
+                <a asp-action="Delete" asp-route-id="@item.Cod_serviciu" class="btn btn-sm btn-danger">Sterge</a>
             </td>
         </tr>
 }

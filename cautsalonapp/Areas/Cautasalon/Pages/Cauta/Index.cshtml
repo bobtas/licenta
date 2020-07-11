@@ -13,42 +13,81 @@
                         <p style="font-size:30px;color:green;"><strong>Programeaza-te la un salon</strong></p>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Input.Oras" class="control-label"></label>
-                        <select asp-for="Input.Oras" class="form-control">
-                            <option value="Bucuresti">Bucuresti</option>
+                        <select name="saloane" id="saloane_ddl" asp-items="Model.Saloane" class="form-control">
                         </select>
-                        <span asp-validation-for="Input.Oras" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Input.NumeSalon" class="control-label"></label>
-                        <select asp-for="Input.NumeSalon" class="form-control">
-                            <option value="BeautyMania">Beauty Mania</option>
-                            <option value="Magic saloon">Magic Saloon</option>
+                    <div class="form-group" id="servicii_div" style="display:none;">
+                        <select name="servicii" id="servicii_ddl" class="form-control">
                         </select>
-                        <span asp-validation-for="Input.NumeSalon" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Input.Serviciu" class="control-label"></label>
-                        <select asp-for="Input.Serviciu" class="form-control">
-                            <option value="Tuns barbat">Tuns barbat</option>
-                            <option value="Barbierit">Barbierit</option>
-                            <option value="Tuns femeie">Tuns femeie</option>
-                            <option value="Suvite">Suvite</option>
-                            <option value="Vopsit">Vopsit</option>
-                        </select>
-                        <span asp-validation-for="Input.Serviciu" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group" id="datainput" style="display:none;">
                         <label asp-for="Input.Data" class="control-label"></label>
-                        <input asp-for="Input.Data" class="form-control" />
+                        <input asp-for="Input.Data" class="form-control" id="data_val"/>
                         <span asp-validation-for="Input.Data" class="text-danger"></span>
                     </div>
+                    <div class="form-group" id="obsinput" style="display:none;">
+                        <label asp-for="Input.Observatii" class="control-label"></label>
+                        <input asp-for="Input.Observatii" class="form-control" />
+                        <span asp-validation-for="Input.Observatii" class="text-danger"></span>
+                    </div>
                     <br />
-                    <div class="form-group">
-                        <input type="submit" value="Fa programare" class="btn btn-primary" />
+                    <div class="form-group" id="btn_prog">
+                        <input type="submit" value="Programeaza-te" class="btn btn-success"/>
                     </div>
                 </div>
             </section>
         </form>
     </div>
 </div>
+@section Scripts {    
+    <script type="text/javascript">
+        $('#saloane_ddl').change(function () {
+            if ($('#saloane_ddl').val() == "") {
+                $('#servicii_div').hide();
+                $('#btn_prog').hide();
+                $('#btn_prog').hide();
+                $('#obsinput').hide();
+            } else {
+                $('#servicii_div').show();
+                $('#datainput').show();
+                $('#btn_prog').show();
+                $('#obsinput').show();
+                var selectedSalon = $("#saloane_ddl").val();
+                var serviciiSelect = $('#servicii_ddl');
+                serviciiSelect.empty();
+                $.getJSON('@Url.Action("GetServicii", "servicii")', { cod_salon: selectedSalon }, function (servicii) {
+                    if (servicii != null && !jQuery.isEmptyObject(servicii)) {
+                        serviciiSelect.append($('<option/>', {
+                            value: "",
+                            text: "Selecteaza serviciu"
+                        }));
+                        $.each(servicii, function (index, serviciu) {
+                            serviciiSelect.append($('<option/>', {
+                                value: serviciu.value,
+                                text: serviciu.text
+                            }));
+                        });
+                    };
+
+                });
+            }
+        });
+        $('form').on('submit', function () {
+            // do validation here
+            if ($('#saloane_ddl').val() == "") {
+                alert("Va rugam selectati salonul!")
+                return false;
+            }
+            if ($('#servicii_ddl').val() == "" || $('#servicii_ddl').val() == null) {
+                alert("Va rugam selectati serviciul!")
+                return false;
+            }
+            if ($('#data_val').val() == "") {
+                alert("Va rugam selectati data programarii!")
+                return false;
+            }
+           
+                
+        });
+    </script>
+}

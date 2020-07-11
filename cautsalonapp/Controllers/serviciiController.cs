@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using cautsalon.Models;
 using cautsalonapp.Data;
+using cautsalonapp.Models;
+using System.Security.Cryptography.X509Certificates;
 
 namespace cautsalonapp.Controllers
 {
@@ -58,7 +60,12 @@ namespace cautsalonapp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var salon = await _context.Saloane.Where(x => x.Firma.Webuser.UserName == User.Identity.Name).FirstOrDefaultAsync();
+                var saloaneServicii = new SaloaneServicii();
+                saloaneServicii.Salon = salon;
+                saloaneServicii.Serviciu = servicii;
                 _context.Add(servicii);
+                _context.SaloaneServicii.Add(saloaneServicii);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -140,11 +147,33 @@ namespace cautsalonapp.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var servicii = await _context.Servicii.FindAsync(id);
+            var saloaneServicii = await _context.SaloaneServicii.Where(x => x.Serviciu == servicii).FirstOrDefaultAsync();
             _context.Servicii.Remove(servicii);
+            _context.SaloaneServicii.Remove(saloaneServicii);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public IEnumerable<SelectListItem> GetServicii(string cod_salon)
+        {
 
+            using (var context = _context)
+            {
+                var codsalon = int.Parse(cod_salon);
+                IEnumerable<SelectListItem> regions = (from s in context.SaloaneServicii
+                                                       join se in context.Servicii
+                                                       on s.Serviciu.Cod_serviciu equals se.Cod_serviciu
+                                                       where s.Salon.Cod_salon == codsalon
+                                                       select se)
+                        .Select(n =>
+                           new SelectListItem
+                           {
+                               Value = n.Cod_serviciu.ToString(),
+                               Text = n.Denumire + " - " + n.Pret.ToString() + " RON"
+                           }).ToList();
+                return new SelectList(regions, "Value", "Text");
+            }
+
+        }
         private bool ServiciiExists(int id)
         {
             return _context.Servicii.Any(e => e.Cod_serviciu == id);

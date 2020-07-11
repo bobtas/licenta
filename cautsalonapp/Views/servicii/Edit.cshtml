@@ -1,13 +1,12 @@
 ﻿@model cautsalon.Models.Servicii
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editeaza serviciu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Editeaza serviciu</h1>
 
-<h4>Servicii</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,14 +24,14 @@
                 <span asp-validation-for="Pret" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salveaza modificari" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-sm btn-primary">Inapoi la serviciile mele</a>
 </div>
 
 @section Scripts {

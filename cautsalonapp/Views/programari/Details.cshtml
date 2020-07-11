@@ -1,31 +1,65 @@
 ﻿@model cautsalon.Models.Programari
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalii programare";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detalii programare</h1>
 
-<div>
-    <h4>Programari</h4>
+<div>    
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+    <dl class="row" style="background: #e2f6ff;">
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Nume)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>@Html.DisplayFor(model => model.Salon.Nume)</strong>
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Adresa)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>@Html.DisplayFor(model => model.Salon.Adresa)</strong>
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Telefon_salon)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>@Html.DisplayFor(model => model.Salon.Telefon_salon)</strong>
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Salon.Website)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>@Html.DisplayFor(model => model.Salon.Website)</strong>
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Serviciu.Denumire)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>@Html.DisplayFor(model => model.Serviciu.Denumire)</strong>
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
+            @Html.DisplayNameFor(model => model.Serviciu.Pret)
+        </dt>
+        <dd class="col-sm-8">
+            <strong>@Html.DisplayFor(model => model.Serviciu.Pret) RON</strong>
+        </dd>
+        <dt class="col-sm-4" style="color:green;">
             @Html.DisplayNameFor(model => model.Data)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Data)
+        <dd class="col-sm-8">
+            <strong>@Html.DisplayFor(model => model.Data)</strong>
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-4" style="color:green;">
             @Html.DisplayNameFor(model => model.Observatii)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Observatii)
+        <dd class="col-sm-8">
+            <strong>@Html.DisplayFor(model => model.Observatii)</strong>
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Cod_programare">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div>   
+    <a asp-action="Index" class="btn btn-sm btn-primary">Inapoi la programarile mele</a>
 </div>

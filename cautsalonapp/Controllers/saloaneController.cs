@@ -112,7 +112,7 @@ namespace cautsalonapp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(salonul_meu));
             }
             return View(saloane);
         }
