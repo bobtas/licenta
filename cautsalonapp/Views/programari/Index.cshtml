@@ -4,16 +4,32 @@
     ViewData["Title"] = "Programarile mele";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Programarile mele</h1>
-
+@if (User.IsInRole("salonowner"))
+{
+    <h1>Programari</h1>
+}
+else
+{
+    <h1>Programarile mele</h1>
+}
 <table class="table" style="background: #e2f6ff;">
     <thead>
         <tr>
-
-            <th style="color: green;">
-                @Html.DisplayNameFor(model => model.Salon.Nume)
-            </th>
+            @if (User.IsInRole("salonowner"))
+            {
+                <th style="color: green;">
+                    @Html.DisplayNameFor(model => model.Client.Nume)
+                </th>
+                <th style="color: green;">
+                    @Html.DisplayNameFor(model => model.Client.Telefon)
+                </th>
+            }
+            else
+            {
+                <th style="color: green;">
+                    @Html.DisplayNameFor(model => model.Salon.Nume)
+                </th>
+            }
             <th style="color: green;">
                 @Html.DisplayNameFor(model => model.Serviciu.Denumire)
             </th>
@@ -23,28 +39,79 @@
             <th style="color: green;">
                 @Html.DisplayNameFor(model => model.Observatii)
             </th>
+            <th style="color: green;">
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th style="color: green;">
+                Observatii status
+            </th>
             <th></th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (User.IsInRole("salonowner"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Client.Nume)  @Html.DisplayFor(modelItem => item.Client.Prenume)
+                    </td>
+                    <td>
+                        (+40) @Html.DisplayFor(modelItem => item.Client.Telefon)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salon.Nume)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serviciu.Denumire)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observatii)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                @if (User.IsInRole("salonowner"))
+                {
+                    @if (item.Status == "Confirmata")
+                    {
+
+                    }
+                    else if (item.Status == "Noua")
+                    {
+                        <td></td>
+                        <td>
+                            <a asp-action="Confirma" asp-route-id="@item.Cod_programare" class="btn btn-sm btn-info">Confirma</a>                        
+                            <a asp-action="Anuleaza" asp-route-id="@item.Cod_programare" class="btn btn-sm btn-danger">Anuleaza</a>
+                        </td>
+                    }
+                    else if (item.Status == "Anulata")
+                    {
             <td>
-                @Html.DisplayFor(modelItem => item.Salon.Nume)
+                @Html.DisplayFor(modelItem => item.Motiv_anulare)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Serviciu.Denumire)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observatii)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Cod_programare" class="btn btn-sm btn-info">Detalii</a>
-            </td>
-        </tr>
-}
+                        <td>
+                           
+                        </td>
+                    }
+                }
+                else
+                {
+            <td>@Html.DisplayFor(modelItem => item.Motiv_anulare)</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Cod_programare" class="btn btn-sm btn-info">Detalii</a>
+                    </td>
+                }
+            </tr>
+        }
     </tbody>
 </table>

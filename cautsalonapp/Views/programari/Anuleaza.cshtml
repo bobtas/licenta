@@ -1,0 +1,33 @@
+﻿@model cautsalon.Models.Programari
+@{
+    ViewData["Title"] = "Anulare";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Anuleaza programare</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Anuleaza">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Cod_programare" />
+            <div class="form-group">
+                <label asp-for="Motiv_anulare" class="control-label"></label>
+                <input asp-for="Motiv_anulare" class="form-control" />
+                <span asp-validation-for="Motiv_anulare" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <input type="submit" value="Anuleaza programare" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-sm btn-primary">Inapoi la programari</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

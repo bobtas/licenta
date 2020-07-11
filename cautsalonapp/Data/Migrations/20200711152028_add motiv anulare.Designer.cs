@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cautsalonapp.Data;
 
 namespace cautsalonapp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200711152028_add motiv anulare")]
+    partial class addmotivanulare
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,22 +50,22 @@ namespace cautsalonapp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9db5f94b-db45-4f9a-931d-d69f459e4c2f",
-                            ConcurrencyStamp = "64836753-ae6c-4673-a787-a06cea948492",
+                            Id = "3e508150-2355-4fc7-ad86-9463ca9025f1",
+                            ConcurrencyStamp = "d75c5816-039c-40a2-a182-ce36ec975045",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4729ef50-3b0e-4aa3-8761-c901fa099b70",
-                            ConcurrencyStamp = "ba308781-fbe5-4446-b168-e74bc5930277",
+                            Id = "53e76bad-7800-49b4-a9bd-b00d176f223c",
+                            ConcurrencyStamp = "86d4e38f-719b-4bf3-a6b5-aef1c09e712c",
                             Name = "salonowner",
                             NormalizedName = "SALONOWNER"
                         },
                         new
                         {
-                            Id = "b0780ce2-dd2e-4f17-9816-0c9f9a7bb62c",
-                            ConcurrencyStamp = "d0624a53-9d97-4163-beb2-89c45143c291",
+                            Id = "41b8611b-dda5-4e49-8bb2-6868d513dd92",
+                            ConcurrencyStamp = "9519e9bd-3f59-4d31-a159-6a65c86d0d7c",
                             Name = "client",
                             NormalizedName = "CLIENT"
                         });

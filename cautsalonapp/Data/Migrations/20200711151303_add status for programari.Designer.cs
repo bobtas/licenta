@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cautsalonapp.Data;
 
 namespace cautsalonapp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200711151303_add status for programari")]
+    partial class addstatusforprogramari
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,22 +50,22 @@ namespace cautsalonapp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9db5f94b-db45-4f9a-931d-d69f459e4c2f",
-                            ConcurrencyStamp = "64836753-ae6c-4673-a787-a06cea948492",
+                            Id = "dc577b2e-bb2e-45ac-9a2b-8cbf96f78104",
+                            ConcurrencyStamp = "6c2cd747-df9e-44fd-b9eb-e735b4a6a8f3",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4729ef50-3b0e-4aa3-8761-c901fa099b70",
-                            ConcurrencyStamp = "ba308781-fbe5-4446-b168-e74bc5930277",
+                            Id = "2db1a25e-ce32-4043-8a07-5347279ba2fd",
+                            ConcurrencyStamp = "fffff01c-ddac-4cef-ba77-16f7204db0bf",
                             Name = "salonowner",
                             NormalizedName = "SALONOWNER"
                         },
                         new
                         {
-                            Id = "b0780ce2-dd2e-4f17-9816-0c9f9a7bb62c",
-                            ConcurrencyStamp = "d0624a53-9d97-4163-beb2-89c45143c291",
+                            Id = "790901a5-2482-44ec-9909-003e986b757c",
+                            ConcurrencyStamp = "79a84e12-1cab-426c-943a-ef9cb6eec084",
                             Name = "client",
                             NormalizedName = "CLIENT"
                         });
@@ -323,9 +325,6 @@ namespace cautsalonapp.Data.Migrations
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Motiv_anulare")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Observatii")
                         .HasColumnType("nvarchar(max)");

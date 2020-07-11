@@ -110,7 +110,9 @@ namespace cautsalonapp.Areas.Cautasalon.Pages.Cauta
                         Data = Input.Data,
                         Observatii = Input.Observatii,
                         Salon = salon,
-                        Serviciu = serviciu                        
+                        Serviciu = serviciu,
+                        Status = "Noua",
+                        Confirmata = false
                     };
                     context.Programari.Add(programari);
                     await context.SaveChangesAsync();

@@ -10,7 +10,7 @@ namespace cautsalon.Models
     public class Servicii
     {
         public int Cod_serviciu { get; set; }
-        [Display(Name = "Serviciu ales")]
+        [Display(Name = "Serviciu")]
         public string Denumire { get; set; }       
         public double Pret { get; set; }
     }
