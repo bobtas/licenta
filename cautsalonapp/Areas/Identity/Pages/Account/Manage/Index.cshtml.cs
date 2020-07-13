@@ -70,15 +70,29 @@ namespace cautsalonapp.Areas.Identity.Pages.Account.Manage
 
             Username = userName;
 
+           
+            if (client == null) { 
             Input = new InputModel
             {                
-                Adresa = client.Adresa,
-                Judet = client.Judet,
-                Nume = client.Nume,
-                Prenume = client.Prenume,
-                Sex = client.Sex,
-                Telefon = client.Telefon
+                Adresa =  "",
+                Judet = "",
+                Nume =  "" ,
+                Prenume = "" ,
+                Sex = 1,
+                Telefon = "" 
             };
+            } else
+            {
+                Input = new InputModel
+                {
+                    Adresa = client.Adresa,
+                    Judet = client.Judet,
+                    Nume = client.Nume,
+                    Prenume = client.Prenume,
+                    Sex = client.Sex,
+                    Telefon = client.Telefon
+                };
+            }
         }
 
         public async Task<IActionResult> OnGetAsync()

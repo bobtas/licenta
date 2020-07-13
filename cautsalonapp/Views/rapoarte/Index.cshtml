@@ -1,7 +1,113 @@
-﻿
+﻿@model cautsalon.Models.saloaneViewModel
+
 @{
     ViewData["Title"] = "Rapoarte";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Rapoarte</h1>
+
+<div>
+    <div class="row">
+        <div class="col-sm-2">
+            <hr />
+            <a id="btnprog" class="btn btn-primary" style="background: #e2f6ff; width:100% !important;">Raport programari</a>
+            <hr />
+            <a id="btnserv" class="btn btn-primary" style="background: #e2f6ff; width:100% !important;">Raport servicii</a>
+            <hr />
+        </div>
+        <div class="col-sm-10">
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/font-awesome/js/all.js"></script>
+<script src="~/Chart.js/Chart.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script>
+    $("#btnprog").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetRaportProgramari", "rapoarte")',
+            contentType: "application/json",
+            dataType: "json",
+            success: function (chData) {
+                var aData = chData;
+                var aLabels = aData[0];
+                var aDatasets1 = aData[1];
+                console.log(aLabels)
+                console.log(aDatasets1)
+                var ctx1 = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx1, {
+                    type: 'pie',
+                    height: "230px",
+                    width: "300px",
+                    responsive: false,
+                    animation: true,
+                    legend: { position: 'bottom' },
+                    data: {
+                        //labels: ["M", "T", "W", "T", "F", "S", "S"],
+                        labels: [aLabels[0], aLabels[1], aLabels[2]],
+                        datasets: [{
+                            label: 'Monthly Expenses',
+                            data: [aDatasets1[0], aDatasets1[1], aDatasets1[2]],
+                            backgroundColor: ["red", "blue", "green"]
+                        }]
+                    },
+                    borderWidth: 3
+                });
+            }
+        });
+    });
+    $("#btnserv").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetRaportServicii", "rapoarte")',
+            contentType: "application/json",
+            dataType: "json",
+            success: function (chData) {
+                var aData = chData;
+                var aLabels = aData[0];
+                var aDatasets1 = aData[1];
+                console.log(aLabels)
+                console.log(aDatasets1)
+                var ctx1 = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx1, {
+                    type: 'pie',
+                    height: "230px",
+                    width: "300px",
+                    responsive: false,
+                    animation: true,
+                    legend: { position: 'bottom' },
+                    data: {
+                        //labels: ["M", "T", "W", "T", "F", "S", "S"],
+                        labels: [aLabels[0], aLabels[1], aLabels[2]],
+                        datasets: [{
+                            label: 'Monthly Expenses',
+                            data: [aDatasets1[0], aDatasets1[1], aDatasets1[2]],
+                            backgroundColor: ["red", "blue", "green"]
+                        }]
+                    },
+                    borderWidth: 3
+                });
+                var red = 255;
+                var green = 255;
+                var blue = 255;
+                for (i = 3; i < aLabels.length; i++) {
+                    red -= 20;
+                    green -= 15;
+                    blue -= 20;
+                    console.log(aLabels[i]);
+                    myChart.data.labels.push(aLabels[i])
+                    myChart.data.datasets[0].data.push(aDatasets1[i]);
+                    myChart.data.datasets[0].backgroundColor.push('rgb(' + red + ',' + green + ',' + blue +')')
+                    myChart.update();
+                }
+
+            }
+        });
+    });
+
+</script>
