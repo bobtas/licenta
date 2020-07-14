@@ -29,15 +29,14 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script>
     $("#btnprog").on("click", function () {
-        $("#myChart2").hide();
-        $("#myChart").show();
+        $("#myChart").show()
+        $("#myChart2").hide()
         $.ajax({
             type: "POST",
             url: '@Url.Action("GetRaportProgramari", "rapoarte")',
             contentType: "application/json",
             dataType: "json",
-            success: function (chData) {
-
+            success: function (chData) {                
                 var aData = chData;
                 var aLabels = aData[0];
                 var aDatasets1 = aData[1];
@@ -57,26 +56,25 @@
                         datasets: [{
                             label: 'Monthly Expenses',
                             data: [aDatasets1[0], aDatasets1[1], aDatasets1[2]],
-                            backgroundColor: ["GREEN", "RED", "BLUE"]
+                            backgroundColor: ["green", "red", "blue"]
                         }]
-                    },
-                    borderWidth: 3
+                    }
                 });
             }
         });
     });
     $("#btnserv").on("click", function () {
-        $("#myChart").hide();
-        $("#myChart2").show();
+        $("#myChart").hide()
+        $("#myChart2").show()
         $.ajax({
             type: "POST",
             url: '@Url.Action("GetRaportServicii", "rapoarte")',
             contentType: "application/json",
             dataType: "json",
             success: function (chData) {
-                var colors = ["GREEN", "RED", "BLUE", "MOCCASIN", "DARKGREEN", "TOMATO", "GOLD", "DARKKHAKI", "VIOLET", "DARKMAGENTA", "SALMON",
-                    "SLATEBLUE", "LIME", "AQUAMARINE", "DEEPPINK", "ROSYBROWN", "DIMGRAY", "BLACK", "MAGENTA", "MISTYROSE",
-                    "WHEAT", "MEDIUMBLUE"];
+                var colors = ["green", "red", "blue", "moccasin", "darkgreen", "tomato", "gold", "violet", "darkkhaki", "salmon", "darkmagenta",
+                    "slateblue", "lime", "aquamarine", "deeppink", "rosybrown", "dimgray", "black", "magenta", "mistyrose",
+                    "wheat", "mediumblue"];
                 var aData = chData;
                 var aLabels = aData[0];
                 var aDatasets1 = aData[1];
@@ -96,18 +94,17 @@
                         datasets: [{
                             label: 'Monthly Expenses',
                             data: [aDatasets1[0], aDatasets1[1], aDatasets1[2]],
-                            backgroundColor: [colors[0], colors[1], colors[2]]
+                            backgroundColor: ["green", "red", "blue"]
                         }]
-                    },
-                    borderWidth: 3
+                    }
                 });
                 
                 var red = 255;
                 var green = 255;
                 var blue = 255;
                 for (i = 3; i < aLabels.length; i++) {
-                    red -= 20;
-                    green -= 15;
+                    red -= 30;
+                    green -= 40;
                     blue -= 20;
                     console.log(aLabels[i]);
                     myChart.data.labels.push(aLabels[i])
