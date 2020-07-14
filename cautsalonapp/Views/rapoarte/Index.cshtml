@@ -18,6 +18,7 @@
         </div>
         <div class="col-sm-10">
             <canvas id="myChart" width="400" height="200"></canvas>
+            <canvas id="myChart2" width="400" height="200"></canvas>
         </div>
     </div>
 </div>
@@ -28,12 +29,15 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script>
     $("#btnprog").on("click", function () {
+        $("#myChart2").hide();
+        $("#myChart").show();
         $.ajax({
             type: "POST",
             url: '@Url.Action("GetRaportProgramari", "rapoarte")',
             contentType: "application/json",
             dataType: "json",
             success: function (chData) {
+
                 var aData = chData;
                 var aLabels = aData[0];
                 var aDatasets1 = aData[1];
@@ -53,7 +57,7 @@
                         datasets: [{
                             label: 'Monthly Expenses',
                             data: [aDatasets1[0], aDatasets1[1], aDatasets1[2]],
-                            backgroundColor: ["red", "blue", "green"]
+                            backgroundColor: ["GREEN", "RED", "BLUE"]
                         }]
                     },
                     borderWidth: 3
@@ -62,18 +66,23 @@
         });
     });
     $("#btnserv").on("click", function () {
+        $("#myChart").hide();
+        $("#myChart2").show();
         $.ajax({
             type: "POST",
             url: '@Url.Action("GetRaportServicii", "rapoarte")',
             contentType: "application/json",
             dataType: "json",
             success: function (chData) {
+                var colors = ["GREEN", "RED", "BLUE", "MOCCASIN", "DARKGREEN", "TOMATO", "GOLD", "DARKKHAKI", "VIOLET", "DARKMAGENTA", "SALMON",
+                    "SLATEBLUE", "LIME", "AQUAMARINE", "DEEPPINK", "ROSYBROWN", "DIMGRAY", "BLACK", "MAGENTA", "MISTYROSE",
+                    "WHEAT", "MEDIUMBLUE"];
                 var aData = chData;
                 var aLabels = aData[0];
                 var aDatasets1 = aData[1];
                 console.log(aLabels)
                 console.log(aDatasets1)
-                var ctx1 = document.getElementById("myChart").getContext('2d');
+                var ctx1 = document.getElementById("myChart2").getContext('2d');
                 var myChart = new Chart(ctx1, {
                     type: 'pie',
                     height: "230px",
@@ -87,11 +96,12 @@
                         datasets: [{
                             label: 'Monthly Expenses',
                             data: [aDatasets1[0], aDatasets1[1], aDatasets1[2]],
-                            backgroundColor: ["red", "blue", "green"]
+                            backgroundColor: [colors[0], colors[1], colors[2]]
                         }]
                     },
                     borderWidth: 3
                 });
+                
                 var red = 255;
                 var green = 255;
                 var blue = 255;
@@ -102,7 +112,7 @@
                     console.log(aLabels[i]);
                     myChart.data.labels.push(aLabels[i])
                     myChart.data.datasets[0].data.push(aDatasets1[i]);
-                    myChart.data.datasets[0].backgroundColor.push('rgb(' + red + ',' + green + ',' + blue +')')
+                    myChart.data.datasets[0].backgroundColor.push(colors[i])
                     myChart.update();
                 }
 

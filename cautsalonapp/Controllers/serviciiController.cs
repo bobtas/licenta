@@ -24,7 +24,14 @@ namespace cautsalonapp.Controllers
         // GET: servicii
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Servicii.ToListAsync());
+            var servicii = from s in _context.SaloaneServicii
+                           join se in _context.Servicii
+                           on s.Serviciu.Cod_serviciu equals se.Cod_serviciu
+                           join sa in _context.Saloane
+                           on s.Salon.Cod_salon equals sa.Cod_salon
+                           where s.Salon.Firma.Webuser.UserName == User.Identity.Name
+                           select se;
+            return View(await servicii.ToListAsync());
         }
 
         // GET: servicii/Details/5
@@ -148,9 +155,12 @@ namespace cautsalonapp.Controllers
         {
             var servicii = await _context.Servicii.FindAsync(id);
             var saloaneServicii = await _context.SaloaneServicii.Where(x => x.Serviciu == servicii).FirstOrDefaultAsync();
-            _context.Servicii.Remove(servicii);
             _context.SaloaneServicii.Remove(saloaneServicii);
             await _context.SaveChangesAsync();
+            _context.Servicii.Remove(servicii);
+            await _context.SaveChangesAsync();
+
+
             return RedirectToAction(nameof(Index));
         }
         public IEnumerable<SelectListItem> GetServicii(string cod_salon)

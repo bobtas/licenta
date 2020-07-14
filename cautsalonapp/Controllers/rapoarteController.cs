@@ -77,10 +77,14 @@ namespace cautsalonapp.Controllers
         [HttpPost]
         public async Task<JsonResult> GetRaportServicii()
         {
-
-            var servicii = await (from p in _context.Servicii
-                                  select new { p.Cod_serviciu, p.Denumire }).ToListAsync();
-
+            
+            var servicii = from s in _context.SaloaneServicii
+                           join se in _context.Servicii
+                           on s.Serviciu.Cod_serviciu equals se.Cod_serviciu
+                           join sa in _context.Saloane
+                           on s.Salon.Cod_salon equals sa.Cod_salon
+                           where s.Salon.Firma.Webuser.UserName == User.Identity.Name
+                           select se;
             var query = await (from p in _context.Programari
                                join s in _context.Saloane
                                on p.Salon.Cod_salon equals s.Cod_salon
