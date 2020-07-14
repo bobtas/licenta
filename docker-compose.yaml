@@ -19,6 +19,6 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Passw0rd1
       - MSSQL_PID=Express
-   volumes:
-     mydata:/licenta/licenta/mydata
+volumes:
+  mydata:/licenta/licenta/mydata
 
